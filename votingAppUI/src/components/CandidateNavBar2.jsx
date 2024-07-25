@@ -6,7 +6,7 @@ const OfficialNavBar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('/api/official/logout', {
+      const response = await fetch('/api/candidate/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ const OfficialNavBar = () => {
 
       if (response.ok) {
         // Perform any additional logout actions here if needed
-        navigate('/officials');
+        navigate('/forCandidates');
       } else {
         console.error('Failed to log out');
       }

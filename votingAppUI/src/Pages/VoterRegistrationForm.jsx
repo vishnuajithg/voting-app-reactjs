@@ -8,17 +8,17 @@ const VoterRegistrationForm = () => {
     const navigate = useNavigate()
    
     const [fullName,setFullName] = useState('')
-    const [stdId,setStdID] = useState('')
-    const [stdDob, setStdDob] = useState('')
+    const [studentId,setStudentId] = useState('')
+    const [dob, setDob] = useState('')
     const [email, setEmail] = useState('')
-    const [stdMob,setStdMob] = useState('')
-    const [stdStreamStudy, setStdStreamStudy] = useState('')
-    const [stdYear, setStdYear] = useState('')
+    const [phone,setPhone] = useState('')
+    const [stream, setStream] = useState('')
+    const [year, setYear] = useState('')
     const [password, setPassword] = useState('')
   
     const voterRegFormSubmit = async (voterRegData)=>{
       console.log(voterRegData)
-      const res = await fetch('http://localhost:5000/voterRegistrationForm',{
+      const res = await fetch('/api/voter/voterRegistrationForm',{
         method:'POST',
         headers:{
           'Content-Type': 'application/json'
@@ -41,81 +41,81 @@ const VoterRegistrationForm = () => {
     const getVoterRegForm = (e)=>{
       e.preventDefault();
       const voterRegData = {
-        fullName,stdId, stdDob, email, stdMob, stdStreamStudy, stdYear, password
+        fullName,studentId, dob, email, phone, stream, year, password
       }
       voterRegFormSubmit(voterRegData)
     }
   return (
     <>
       <NavBarCommon/>
-      <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
-    <h1 class="text-2xl font-bold mb-6 text-center">Voter Registration</h1>
-    <form  onSubmit={getVoterRegForm} action="#" method="#">
+      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+    <h1 className="text-2xl font-bold mb-6 text-center">Voter Registration</h1>
+    <form  onSubmit={getVoterRegForm} action="#" method="POST">
         
-        <div class="mb-4">
-            <label for="full_name" class="block text-gray-700 font-bold mb-2">Full Name:</label>
+        <div className="mb-4">
+            <label htmlFor="full_name" className="block text-gray-700 font-bold mb-2">Full Name:</label>
             <input type="text" value={fullName}
                 onChange={(e)=>{
                   setFullName(e.target.value)
-                }} id="full_name" name="full_name" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                }} id="full_name" name="full_name" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
        
-        <div class="mb-4">
-            <label for="student_id" class="block text-gray-700 font-bold mb-2">Student ID:</label>
-            <input type="text" value={stdId}
+        <div className="mb-4">
+            <label htmlFor="student_id" className="block text-gray-700 font-bold mb-2">Student ID:</label>
+            <input type="text" value={studentId}
                 onChange={(e)=>{
-                  setStdID(e.target.value)
-                }} id="student_id" name="student_id" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                  setStudentId(e.target.value)
+                }} id="student_id" name="student_id" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
         
-        <div class="mb-4">
-            <label for="dob" class="block text-gray-700 font-bold mb-2">Date of Birth:</label>
-            <input type="date" value={stdDob}
+        <div className="mb-4">
+            <label htmlFor="dob" className="block text-gray-700 font-bold mb-2">Date of Birth:</label>
+            <input type="date" value={dob}
                 onChange={(e)=>{
-                  setStdDob(e.target.value)
-                }} id="dob" name="dob" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                  setDob(e.target.value)
+                }} id="dob" name="dob" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
         
-        <div class="mb-4">
-            <label for="email" class="block text-gray-700 font-bold mb-2">Email Address:</label>
+        <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email Address:</label>
             <input type="email" value={email}
                 onChange={(e)=>{
                   setEmail(e.target.value)
-                }} id="email" name="email" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  required/>
+                }} id="email" name="email" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  required/>
         </div>
         
-        <div class="mb-4">
-            <label for="phone" class="block text-gray-700 font-bold mb-2">Phone Number:</label>
-            <input type="tel" value={stdMob}
+        <div className="mb-4">
+            <label htmlFor="phone" className="block text-gray-700 font-bold mb-2">Phone Number:</label>
+            <input type="text" value={phone}
                 onChange={(e)=>{
-                  setStdMob(e.target.value)
-                }} id="phone" name="phone" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                  setPhone(e.target.value)
+                }} id="phone" name="phone" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
         
-        <div class="mb-4">
-            <label for="stream" class="block text-gray-700 font-bold mb-2">Stream of Studying:</label>
-            <input type="text" value={stdStreamStudy}
+        <div className="mb-4">
+            <label htmlFor="stream" className="block text-gray-700 font-bold mb-2">Stream of Studying:</label>
+            <input type="text" value={stream}
                 onChange={(e)=>{
-                  setStdStreamStudy(e.target.value)
-                }} id="stream" name="stream" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                  setStream(e.target.value)
+                }} id="stream" name="stream" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
 
-        <div class="mb-4">
-            <label for="year" class="block text-gray-700 font-bold mb-2">Year of Studying:</label>
-            <input type="text" value={stdYear}
+        <div className="mb-4">
+            <label htmlFor="year" className="block text-gray-700 font-bold mb-2">Year of Studying:</label>
+            <input type="text" value={year}
                 onChange={(e)=>{
-                  setStdYear(e.target.value)
-                }} id="year" name="year" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                  setYear(e.target.value)
+                }} id="year" name="year" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
-        <div class="mb-4">
-            <label for="password" class="block text-gray-700 font-bold mb-2">Password:</label>
+        <div className="mb-4">
+            <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Password:</label>
             <input type="password" value={password}
                 onChange={(e)=>{
                   setPassword(e.target.value)
-                }} id="password" name="password" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
+                }} id="password" name="password" className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required/>
         </div>
-        <div class="mb-4">
-            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Registration</button>
+        <div className="mb-4">
+            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Registration</button>
         </div>
     </form>
 </div>

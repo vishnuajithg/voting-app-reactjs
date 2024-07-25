@@ -10,7 +10,7 @@ const CandidateLogin = () => {
     const [password, setPassword] = useState('')
 
     const checkLogin = async (loginCreds)=>{
-        const res = await fetch('http://localhost:5000/loginChecker',{
+        const res = await fetch('/api/candidate/loginChecker',{
             method:'POST',
             headers:{  
                 'Content-Type':'application/json',
@@ -18,8 +18,8 @@ const CandidateLogin = () => {
             body : JSON.stringify(loginCreds)
           })
           if(res.ok){
-            alert('Logined')
-            return navigate(`/CandidateHome/${username}`)
+            alert('Logged In')
+            return navigate(`/CandidateHome/`)
           }
         }
 

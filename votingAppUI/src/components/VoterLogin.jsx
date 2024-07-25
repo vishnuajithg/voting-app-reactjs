@@ -9,7 +9,7 @@ const VoterLogin = () => {
     const [password, setPassword] = useState('')
 
     const checkLogin = async (loginCreds)=>{
-        const res = await fetch('http://localhost:5000/voterLoginChecker',{
+        const res = await fetch('/api/voter/loginChecker',{
             method:'POST',
             headers:{  
                 'Content-Type':'application/json',

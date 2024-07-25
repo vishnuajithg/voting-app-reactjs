@@ -33,7 +33,7 @@ const voterSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: TextTrackCueList
+        required: true
     },
     hasVoted: {
         type: Boolean,

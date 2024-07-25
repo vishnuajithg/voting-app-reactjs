@@ -1,6 +1,29 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const VoterNavBar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/voter/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Ensure cookies are included in the request
+      });
+
+      if (response.ok) {
+        // Perform any additional logout actions here if needed
+        navigate('/forCandidates');
+      } else {
+        console.error('Failed to log out');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
   return (
     <>
           <nav>
@@ -18,7 +41,7 @@ const VoterNavBar = () => {
                       </svg></a>
                 </div>
                 
-                <div><a className="bg-red-600 text-white p-2 rounded-md mx-3 font-medium text-[16px] hover:bg-red-700 hover:text-white" href="">LOGOUT</a></div>
+                <div><button className="bg-red-600 text-white p-2 rounded-md mx-3 font-medium text-[16px] hover:bg-red-700 hover:text-white" onClick={handleLogout}>LOGOUT</button></div>
             </div>
         </div>
     </nav>

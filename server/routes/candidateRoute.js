@@ -14,6 +14,6 @@ const router = express.Router();
 router.post('/candidateRegistrationForm', registerCandidate);
 router.post('/loginChecker', loginCandidate);
 router.get('/candidateHome',authenticateToken,candidateHome);
-router.post('/completeRegistrationCandidate', completeRegistrationCandidate);
+router.post('/completeRegistrationCandidate',authenticateToken, completeRegistrationCandidate);
 router.post("/logout", logout)
 module.exports = router;

@@ -10,11 +10,11 @@ const CandidateRegistrationForm = () => {
   const [name,setName] = useState('')
   const [dob,setDob] = useState('')
   const [username, setUsername] = useState('')
-  const [pwd, setPwd] = useState('')
+  const [password, setPassword] = useState('')
 
   const candRegFormSubmit = async (candRegData)=>{
     console.log(candRegData)
-    const res = await fetch('http://localhost:5000/candidateRegistrationForm',{
+    const res = await fetch('/api/candidate/candidateRegistrationForm',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const CandidateRegistrationForm = () => {
   const getCandRegForm = (e)=>{
     e.preventDefault();
     const candRegData = {
-      name, dob, username, pwd
+      name, dob, username, password
     }
     candRegFormSubmit(candRegData)
   }
@@ -54,13 +54,13 @@ const CandidateRegistrationForm = () => {
           </h1>
           <form onSubmit={getCandRegForm} action="">
             <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2">
+              <label for="name" class="block text-gray-700 font-bold mb-2">
                 Enter Your Name:
               </label>
               <input
                 type="text"
-                id="stream"
-                name="stream"
+                id="name"
+                name="name"
                 value={name}
                 onChange={(e)=>{
                   setName(e.target.value)
@@ -84,13 +84,13 @@ const CandidateRegistrationForm = () => {
               />
             </div>
             <div class="mb-4">
-              <label for="year" class="block text-gray-700 font-bold mb-2">
-                Enter any username:
+              <label for="email" class="block text-gray-700 font-bold mb-2">
+                Enter your email:
               </label>
               <input
-                type="text"
-                id="year"
-                name="year"
+                type="email"
+                id="email"
+                name="email"
                 value={username}
                 onChange={(e)=>{setUsername(e.target.value)}}
                 class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -99,15 +99,15 @@ const CandidateRegistrationForm = () => {
             </div>
 
             <div class="mb-4">
-              <label for="age" class="block text-gray-700 font-bold mb-2">
+              <label for="password" class="block text-gray-700 font-bold mb-2">
                 Enter any password:
               </label>
               <input
                 type="password"
-                id="age"
-                name="age"
-                value={pwd}
-                onChange={(e)=>{setPwd(e.target.value)}}
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e)=>{setPassword(e.target.value)}}
                 class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               />

@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 // const Candidates = require('./models/Candidate');
 const Candidate = require('./routes/candidateRoute.js');
 const cookieParser = require('cookie-parser')
+const Voter = require('./routes/voterRoute.js');
+const Official = require('./routes/officialRoute.js');
 
 require('dotenv').config();
 
@@ -31,6 +33,8 @@ try {
 }
 
 app.use('/candidate', Candidate);
+app.use('/voter', Voter);
+app.use('/official', Official);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

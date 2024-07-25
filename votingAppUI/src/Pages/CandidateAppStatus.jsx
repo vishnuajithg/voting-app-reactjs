@@ -1,12 +1,13 @@
 import React from 'react'
-import NavBarCommon from '../components/NavBarCommon'
+// import NavBarCommon from '../components/NavBarCommon'
 import CandidateNavBar from '../components/CandidateNavBar'
 import Footer from '../components/Footer'
+import OfficialNavBar from '../components/OfficialNavBar'
 
 const CandidateAppStatus = () => {
   return (
     <>
-      <NavBarCommon/>
+     <OfficialNavBar/>
       <CandidateNavBar/>
     <br /><br />
       <table class="min-w-[70%] bg-white border border-gray-300 m-auto">

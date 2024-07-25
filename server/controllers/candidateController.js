@@ -99,37 +99,35 @@ const candidateHome = async (req, res,) => {
       res.status(500).json({ message: 'Server error' });
   }
   }
+
 const completeRegistrationCandidate = async (req, res) => {
-  const Candidate = require('../models/Candidate');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-require('dotenv').config();
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
-
-const registerCandidatePartTwo = async (req, res) => {
   try {
+    const token = req.headers.cookie.split('=')[1]; // Extract the token from the header\
+      // console.log('token', token)
+      if (!token) return res.status(401).json({ error: "Access denied" });
+      // console.log('tokeneeeeee', token)
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const username = decoded.username;
+
     const { stream, year, age, symbol, dob } = req.body;
 
-    // Basic validation
-    if (!username || !stream || !year || !age || !symbol) {
+    if (!stream || !year || !age || !symbol || !dob) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Find the existing candidate by username
     const existingCandidate = await Candidate.findOne({ username });
     if (!existingCandidate) {
       return res.status(404).json({ message: 'Candidate not found' });
     }
 
-    // Update the candidate's details
     existingCandidate.stream = stream;
     existingCandidate.year = year;
     existingCandidate.age = age;
     existingCandidate.symbol = symbol;
+    existingCandidate.dob = dob;
 
     await existingCandidate.save();
+    console.log('success')
     res.status(200).json({ message: 'Candidate details updated successfully' });
   } catch (error) {
     console.error('Error updating candidate:', error);
@@ -137,9 +135,6 @@ const registerCandidatePartTwo = async (req, res) => {
   }
 };
 
-module.exports = { registerCandidatePartTwo };
-
-}
 
 const logout = async (req,res) =>{
 

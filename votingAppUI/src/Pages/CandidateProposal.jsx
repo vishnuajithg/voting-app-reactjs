@@ -2,11 +2,12 @@ import React from 'react'
 import Footer from '../components/Footer'
 import NavBarCommon from '../components/NavBarCommon'
 import CandidateNavBar from '../components/CandidateNavBar'
+import OfficialNavBar from '../components/OfficialNavBar'
 
 const CandidateProposal = () => {
   return (
     <>
-    <NavBarCommon/>
+     <OfficialNavBar/>
     <CandidateNavBar/>
     <br />
         <form action="/upload_video" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">

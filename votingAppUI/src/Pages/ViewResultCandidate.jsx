@@ -3,11 +3,12 @@ import CandidateNavBar from '../components/CandidateNavBar'
 import NavBarCommon from '../components/NavBarCommon'
 import Footer from '../components/Footer'
 import ViewResult from './ViewResult'
+import OfficialNavBar from '../components/OfficialNavBar'
 
 const ViewResultCandidate = () => {
   return (
     <>
-    <NavBarCommon/>
+     <OfficialNavBar/>
       <CandidateNavBar/>
       <ViewResult/>
       <br />    

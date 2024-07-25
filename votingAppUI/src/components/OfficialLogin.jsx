@@ -9,7 +9,7 @@ const OfficialLogin = () => {
     const [password, setPassword] = useState('')
 
     const checkLogin = async (loginCreds)=>{
-        const res = await fetch('http://localhost:5000/officialRegistrationCumLogin',{
+        const res = await fetch('/api/official/loginChecker',{
             method:'POST',
             headers:{  
                 'Content-Type':'application/json',
