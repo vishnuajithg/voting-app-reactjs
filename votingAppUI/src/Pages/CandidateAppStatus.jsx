@@ -3,8 +3,29 @@ import React from 'react'
 import CandidateNavBar from '../components/CandidateNavBar'
 import Footer from '../components/Footer'
 import OfficialNavBar from '../components/OfficialNavBar'
+import { useState, useEffect } from 'react'
 
 const CandidateAppStatus = () => {
+  const [showData, setShowData] = useState(false);
+    const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+
+        const response = await fetch('/api/candidate/isApproved');
+        const result = await response.json();
+        setShowData(result.isApproved);
+        // console.log("showData",showData);
+        setData(result.isApproved);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the function to fetch data
+    fetchData();
+  }, []); 
   return (
     <>
      <OfficialNavBar/>
@@ -20,8 +41,11 @@ const CandidateAppStatus = () => {
     <tbody>
         <tr>
             <td class="px-6 py-4 border-b border-gray-300 text-gray-700">Approval Status</td>
-            {/* <!-- <td class="px-6 py-4 border-b border-gray-300 text-white bg-red-500">Not Approved</td> --> */}
-            <td class="px-6 py-4 border-b border-gray-300 text-white bg-orange-500">Pending...</td> 
+            {showData ? <td class="px-6 py-4 border-b border-gray-300 text-white bg-green-500">Approved</td>
+            :
+            <td class="px-6 py-4 border-b border-gray-300 text-white bg-red-500">Not Approved</td>}
+            
+             
         </tr>
     </tbody>
 </table>

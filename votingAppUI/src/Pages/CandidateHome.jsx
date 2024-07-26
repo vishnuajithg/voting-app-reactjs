@@ -45,11 +45,11 @@ const CandidateHome = () => {
     <tbody>
         <tr className="bg-gray-50">
             <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Name</td>
-            <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{name}</td>
+            <td className="px-6 py-4 border-b border-gray-300 text-gray-700 ">{name}</td>
         </tr>
         <tr className="bg-white">
             <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Date of Birth</td>
-            <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{dob}</td>
+            <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{new Date(dob).toLocaleDateString('en-GB')}</td>
         </tr>
     </tbody>
 </table>

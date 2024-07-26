@@ -9,6 +9,19 @@ const ElectionStartsStops = () => {
       <OfficialNavBar/>
       <OfficialNavBar2/>
       <div class="max-w-[70%] overflow-x-auto m-auto">
+
+      <form class="space-y-6" action="/start-election" method="POST">
+        <div class="mb-4">
+          <label for="electionName" class="block text-gray-700 font-semibold mb-2">Election Name</label>
+          <input type="text" id="electionName" name="electionName" class="w-full border-2 border-gray-300 p-3 rounded-lg focus:outline-none focus:border-blue-500 transition duration-200" required />
+        </div>
+        <div class="mb-4">
+          <label for="electionDesc" class="block text-gray-700 font-semibold mb-2">Election Description</label>
+          <textarea id="electionDesc" name="electionDesc" class="w-full border-2 border-gray-300 p-3 rounded-lg focus:outline-none focus:border-blue-500 transition duration-200" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="w-full bg-[#409D9B] text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-400 transition duration-300">Declare Election</button>
+      </form>
+
     <table class="min-w-full bg-white border border-gray-300">
         <thead class="bg-[#409D9B] text-white">
             <tr>

@@ -42,20 +42,20 @@ const registerVoter = async (req, res) => {
 
 const loginVoter = async (req, res) => {
     try {
-      const { username, password } = req.body;
-  
-      const voter = await Voter.findOne({ username });
+      const { email, password } = req.body;
+      // console.log("rrrrr",email, password)
+      const voter = await Voter.findOne({ email });
       if (!voter) {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
-
+      console.log('voterrrrr',voter)
       const isMatch = await bcrypt.compare(password, voter.password);
       if (!isMatch) {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
   
       const token = jwt.sign(
-        { id: voter._id, username: voter.username },
+        { id: voter._id, username: voter.email },
         JWT_SECRET,
         { expiresIn: '1h' }
       );
@@ -67,7 +67,7 @@ const loginVoter = async (req, res) => {
         token,
         user: {
           id: voter._id,
-          username: voter.username,
+          username: voter.email,
         }
       });
  
@@ -79,20 +79,21 @@ const loginVoter = async (req, res) => {
 
 const voterHome = async (req, res,) => {
     try {
-      console.log('reached',req.headers.cookie.split('=')[1])
+      // console.log('reached',req.headers.cookie.split('=')[1])
       const token = req.headers.cookie.split('=')[1]; // Extract the token from the header\
-      console.log('token', token)
+      // console.log('token', token)
       if (!token) return res.status(401).json({ error: "Access denied" });
-      console.log('tokeneeeeee', token)
+      // console.log('tokeneeeeee', token)
       const decoded = jwt.verify(token, JWT_SECRET);
-      const username = decoded.username;
-
-      const voter = await Voter.findOne({ username });
+      // console.log(decoded.id,"decoded")
+      const email = decoded.username;
+      console.log("username",email)
+      const voter = await Voter.findOne({ email });
+      console.log(voter)
       if (!voter) {
           return res.status(404).json({ message: 'Voter not found' });
       }
-      console.log(voter)
-      
+
       res.json(voter);
   } catch (error) {
       console.error('Error:', error);
@@ -107,12 +108,33 @@ const logout = async (req,res) =>{
     res.status(200).send("Logout successful");
     return res;
 }
-
+const isApproved = async (req, res) => {
+    try {
+      const token = req.headers.cookie.split('=')[1]; 
+      if (!token) return res.status(401).json({ error: "Access denied" });
+      
+      const decoded = jwt.verify(token, JWT_SECRET);
+      console.log(decoded)
+      const email = decoded.username;
+      
+        const voter = await Voter.findOne({ email });
+        // console.log('vvvvvvvvvoter',voter)
+        if (!voter) {
+            return res.status(404).json({ message: 'Voter not found' });
+        }
+        if (voter.isApproved === true) {
+          return res.status(200).json({ isApproved: true });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
 module.exports = {
     registerVoter,
     loginVoter,
     voterHome,
-    // completeRegistrationCandidate,
+    isApproved,
     logout
   
   };

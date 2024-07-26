@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 // const cookieParser = require('cookie-parser');
 
 
+
 require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
@@ -127,6 +128,7 @@ const completeRegistrationCandidate = async (req, res) => {
     existingCandidate.age = age;
     existingCandidate.symbol = symbol;
     existingCandidate.dob = dob;
+    existingCandidate.isRegistered = 'true';
 
     await existingCandidate.save();
     console.log('success')
@@ -137,7 +139,54 @@ const completeRegistrationCandidate = async (req, res) => {
   }
 };
 
+const isRegistered = async (req, res) => {
+  try {
+    
+    const token = req.headers.cookie.split('=')[1]; 
+      if (!token) return res.status(401).json({ error: "Access denied" });
+      
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const username = decoded.username;
 
+    const candidate = await Candidate.findOne({ username });
+
+    if (!candidate) {
+      return res.status(404).json({ message: 'Candidate not found' });
+    } 
+    if (candidate.isRegistered === true) {
+      return res.status(200).json({ isRegistered: true ,candidate});
+    }
+
+  } catch (error) {
+    console.error('Error checking is registration or not :', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+const isApproved = async (req, res) => {
+  try {
+    
+    const token = req.headers.cookie.split('=')[1]; 
+      if (!token) return res.status(401).json({ error: "Access denied" });
+      
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const username = decoded.username;
+
+    const candidate = await Candidate.findOne({ username });
+
+    if (!candidate) {
+      return res.status(404).json({ message: 'Candidate not found' });
+    } 
+    if (candidate.isApproved === true) {
+      return res.status(200).json({ isApproved: true});
+    }
+
+  } catch (error) {
+    console.error('Error checking is registration or not :', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+
+}
 const logout = async (req,res) =>{
 
     res.clearCookie("authToken");
@@ -149,6 +198,8 @@ module.exports = {
   loginCandidate,
   candidateHome,
   completeRegistrationCandidate,
+  isRegistered,
+  isApproved,
   logout
 
 };

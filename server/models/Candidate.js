@@ -38,6 +38,10 @@ const candidateSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isRegistered: {
+        type: Boolean,
+        default: false
+    },
     registrationDate: {
         type: Date,
         default: Date.now 

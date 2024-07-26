@@ -3,7 +3,7 @@ const {
     registerVoter,
     loginVoter,
     voterHome, 
-    // completeRegistrationCandidate,
+    isApproved,
     logout
   } = require('../controllers/voterController.js');
 
@@ -14,8 +14,8 @@ const  authenticateToken  = require('../Middleware/auth.js');
 const router = express.Router();
 
 router.post('/voterRegistrationForm', registerVoter);
-router.post('/loginChecker', loginVoter);
+router.post('/loginVoter', loginVoter);
 router.get('/voterHome',authenticateToken,voterHome);
-// router.post('/completeRegistrationCandidate',authenticateToken, completeRegistrationCandidate);
+router.get('/isApproved',authenticateToken, isApproved);
 router.post("/logout", logout)
 module.exports = router;

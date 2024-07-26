@@ -22,7 +22,7 @@ const loginOfficial = async (req, res) => {
             username: admin.username,
             password: hashedPassword
         });
-        await newAdminVoter.save();
+        await newAdminVoter.save(); 
         console.log('Admin user created');
       } else {
         console.log('Admin user already exists');
@@ -81,6 +81,7 @@ const getAllCandidates = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
 }
 }
+
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
     res.status(200).send("Logout successful");

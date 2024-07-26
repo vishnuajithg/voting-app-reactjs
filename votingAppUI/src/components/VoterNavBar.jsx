@@ -16,7 +16,7 @@ const VoterNavBar = () => {
 
       if (response.ok) {
         // Perform any additional logout actions here if needed
-        navigate('/forCandidates');
+        navigate('/forVoters');
       } else {
         console.error('Failed to log out');
       }

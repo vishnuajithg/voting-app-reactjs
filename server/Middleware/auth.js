@@ -9,7 +9,9 @@ const authenticateToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
+    req.id = decoded.id;
     req.username = decoded.username;
+    req.email = decoded.email;
     next();
   } catch (error) {
     return res.status(401).json({ error: "Invalid token" });

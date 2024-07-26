@@ -9,7 +9,7 @@ const VoterLogin = () => {
     const [password, setPassword] = useState('')
 
     const checkLogin = async (loginCreds)=>{
-        const res = await fetch('/api/voter/loginChecker',{
+        const res = await fetch('/api/voter/loginVoter',{
             method:'POST',
             headers:{  
                 'Content-Type':'application/json',

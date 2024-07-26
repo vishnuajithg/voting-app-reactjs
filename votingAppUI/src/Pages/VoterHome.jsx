@@ -32,7 +32,7 @@ const VoterHome = () => {
         setPhone(data.phone);
         setStream(data.stream);
         setYear(data.year);
-        setRegistrationDate(new Date(data.registrationDate).toISOString().split('T')[0]);
+        setRegistrationDate(new Date(data.registrationDate).toLocaleString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }));
       };
       fetchUserDetails();
     }, []);
