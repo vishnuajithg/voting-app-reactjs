@@ -14,12 +14,14 @@ const registerCandidate = async (req, res) => {
 
     // Basic validation
     if (!name || !dob || !username || !password) {
+      console.log('All fields are required')
       return res.status(400).json({ message: 'All fields are required' });
     }
 
     // Check if username already exists
     const existingCandidate = await Candidate.findOne({ username });
     if (existingCandidate) {
+      console.log('already exists')
       return res.status(400).json({ message: 'Username already exists' });
     }
 

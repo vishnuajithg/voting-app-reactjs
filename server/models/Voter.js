@@ -35,10 +35,15 @@ const voterSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isApproved: {
+        type: Boolean,
+        default: false
+    },
     hasVoted: {
         type: Boolean,
         default: false 
     },
+    
     registrationDate: {
         type: Date,
         default: Date.now 
