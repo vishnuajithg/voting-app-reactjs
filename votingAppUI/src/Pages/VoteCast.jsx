@@ -33,6 +33,7 @@ const VoteCast = () => {
                 const result = await res.json();
                 console.log(result)
                 setShowData(result.hasVoted);
+
             } catch (error) {
                 console.error(error);
             }

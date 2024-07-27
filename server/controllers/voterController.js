@@ -110,7 +110,7 @@ const getApprovedCandidates = async (req, res) => {
       const decoded = jwt.verify(token, JWT_SECRET);
       // console.log(decoded.id,"decoded")
       const email = decoded.username;
-        const candidates = await Candidate.find({});
+        const candidates = await Candidate.find({ isApproved: true });
         console.log("candidatesssssssssssssssssssssssssssssssssssssss",candidates)
         res.json({candidates});
     } catch (error) {
