@@ -1,6 +1,7 @@
 const Voter = require('../models/Voter');
 const Candidate = require('../models/Candidate');
 const ElectionSchema = require('../models/ElectionSchema');
+const VoteCast = require('../models/VoteCast');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -109,8 +110,8 @@ const getApprovedCandidates = async (req, res) => {
       const decoded = jwt.verify(token, JWT_SECRET);
       // console.log(decoded.id,"decoded")
       const email = decoded.username;
-        const candidates = await Candidate.find();
-        console.log(candidates)
+        const candidates = await Candidate.find({});
+        console.log("candidatesssssssssssssssssssssssssssssssssssssss",candidates)
         res.json({candidates});
     } catch (error) {
         console.error('Error:', error);
@@ -123,7 +124,7 @@ const getElectionDetails = async (req, res) => {
 
         const electionDetails = await ElectionSchema.find({});
         console.log(electionDetails)
-        res.json(electionDetails);
+        res.json({electionDetails});
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Server error' });
@@ -132,27 +133,39 @@ const getElectionDetails = async (req, res) => {
 
 const castVote = async (req, res) => {
     try {
+        const { electionTitle, candidateName } = req.body;
+        const newVoteCast = new VoteCast({
+            electionTitle,
+            candidateName,
+        });
+        await newVoteCast.save();
+
       const token = req.headers.cookie.split('=')[1];
       const decoded = jwt.verify(token, JWT_SECRET);
-      // console.log(decoded.id,"decoded")
       const email = decoded.username;
-        const { candidateId } = req.body;
-        const voter = await Voter.findOne({ email });
-        if (!voter) {
-          return res.status(404).json({ message: 'Voter not found' });
-        }
-        const candidate = await Candidate.findById(candidateId);
-        if (!candidate) {
-          return res.status(404).json({ message: 'Candidate not found' });
-        }
-        voter.candidateId = candidateId;
-        voter.isApproved = true;
-        await voter.save();
-        res.json({ message: 'Vote casted successfully' });
+      await Voter.updateOne({email}, { $set: { hasVoted: true } });
+        res.status(201).json({ message: 'Vote casted successfully' });
+    } catch (error) {
+        console.error('Error casting vote:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+const hasVoted = async (req, res) => {
+    try {
+      const token = req.headers.cookie.split('=')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const email = decoded.username;
+      const voter = await Voter.findOne({ email });
+      if (!voter) {
+        return res.status(404).json({ message: 'Voter not found' });
+      }
+      if (voter.hasVoted === true) {
+        return res.status(200).json({ hasVoted: true });
+      }
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Server error' });
-    }
+}
 }
 const logout = async (req,res) =>{
 
@@ -189,6 +202,8 @@ module.exports = {
     isApproved,
     getApprovedCandidates,
     getElectionDetails,
+    castVote,
+    hasVoted,
     logout
   
   };
