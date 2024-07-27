@@ -2,10 +2,12 @@ import React from 'react'
 import VoterNavBar from '../components/VoterNavBar'
 import VoterNavBar2 from '../components/VoterNavBar2'
 import Footer from '../components/Footer'
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react';
+
 
 const VoteCast = () => {
-
+    const selectRef = useRef();
     const [candidates, setCandidates] = useState([]);
 
     useEffect(() => {
@@ -23,9 +25,46 @@ const VoteCast = () => {
             }
         };
         fetchCandidates()
-    });
+    },[]);
     // console.log(typeof(candidates))
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const selectedValue = selectRef.current.value;
+        console.log(selectedValue);
+        handleVote()
+    }
+
     
+    const handleVote = async (e) => {
+        // e.preventDefault();
+        const selectedValue = selectRef.current.value;
+        const data = {
+            candidateId: selectedValue,
+            voterId: "1234567890" // replace with actual logged in voter ID
+        };
+       
+        try {
+            const electionResponse = await fetch('/api/voter/getElectionDetails');
+            console.log("election response",electionResponse)
+            // const electionData = await electionResponse.json();
+            // console.log(electionData);
+            
+            // const electionTitle = electionData.title;
+            // console.log(electionTitle);
+            // const response = await fetch('/api/voter/castVote', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(data)
+            // });
+            // const result = await response.json();
+            // console.log(result);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     return (
     <>
     <VoterNavBar/>
@@ -35,14 +74,15 @@ const VoteCast = () => {
         <h1 class="text-3xl font-extrabold text-[#172B4D] mb-6 text-center">Cast Your Vote</h1>
         
             <select
+            ref={selectRef} 
                 class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-white border border-gray-200 rounded shadow appearance-none focus:outline-none focus:bg-white focus:border-gray-500 mt-1 text-sm font-sans"
-                defaultValue=""><option value="" disabled>Select the candidate</option>
+                defaultValue="" name="select"><option value="" disabled>Select the candidate</option>
                 {candidates.map((candidate) => (
-                    <option key={candidate._id} value={candidate._id}>{candidate.name}</option>
+                    <option key={candidate._id} value={candidate.name}>{candidate.name}</option>
                 ))}
             </select>
             <br />
-            <button type="submit" class="w-full bg-[#409D9B] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-400 transition duration-300">Submit Vote</button>
+            <button type="submit" onClick={handleSubmit} class="w-full bg-[#409D9B] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-400 transition duration-300">Submit Vote</button>
         
     </div>
     <br />

@@ -11,7 +11,7 @@ const resultSchema = new mongoose.Schema({
         ref: 'Candidate',
         required: true
     },
-    votesReceived: {
+    votesReceived: { 
         type: Number,
         required: true
     }

@@ -1,5 +1,6 @@
 const Voter = require('../models/Voter');
 const Candidate = require('../models/Candidate');
+const ElectionSchema = require('../models/ElectionSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -117,6 +118,42 @@ const getApprovedCandidates = async (req, res) => {
     }
 }
 
+const getElectionDetails = async (req, res) => {
+    try {
+
+        const electionDetails = await ElectionSchema.find({});
+        console.log(electionDetails)
+        res.json(electionDetails);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+const castVote = async (req, res) => {
+    try {
+      const token = req.headers.cookie.split('=')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
+      // console.log(decoded.id,"decoded")
+      const email = decoded.username;
+        const { candidateId } = req.body;
+        const voter = await Voter.findOne({ email });
+        if (!voter) {
+          return res.status(404).json({ message: 'Voter not found' });
+        }
+        const candidate = await Candidate.findById(candidateId);
+        if (!candidate) {
+          return res.status(404).json({ message: 'Candidate not found' });
+        }
+        voter.candidateId = candidateId;
+        voter.isApproved = true;
+        await voter.save();
+        res.json({ message: 'Vote casted successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
 const logout = async (req,res) =>{
 
     res.clearCookie("authToken");
@@ -151,6 +188,7 @@ module.exports = {
     voterHome,
     isApproved,
     getApprovedCandidates,
+    getElectionDetails,
     logout
   
   };

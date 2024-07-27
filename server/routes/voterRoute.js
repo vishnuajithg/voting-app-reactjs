@@ -5,6 +5,7 @@ const {
     voterHome, 
     getApprovedCandidates,
     isApproved,
+    getElectionDetails,
     logout
   } = require('../controllers/voterController.js');
 
@@ -18,6 +19,7 @@ router.post('/voterRegistrationForm', registerVoter);
 router.post('/loginVoter', loginVoter);
 router.get('/voterHome',authenticateToken,voterHome);
 router.get('/getApprovedCandidates',authenticateToken, getApprovedCandidates)
+router.get('/getElectionDetails',authenticateToken, getElectionDetails);
 router.get('/isApproved',authenticateToken, isApproved);
 router.post("/logout", logout)
 module.exports = router;
