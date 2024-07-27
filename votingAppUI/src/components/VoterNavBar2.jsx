@@ -7,7 +7,7 @@
     <div class="flex flex-row bg-[#409D9B] gap-2 justify-center items-center">
         <div class="bg-[#FDE9C9] m-2 p-2 rounded-md"><a href="/voterHome">HOME</a></div>
         <div class="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/voterAppStatus">View Approval Status</a></div>
-        {/* <div class="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/viewSecretCode">View Secret Code</a></div> */}
+       
         <div class="bg-[#DBF094] m-2 p-2 rounded-md"><a href="/voteCast">Vote Cast</a></div>
         <div class="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/viewResultVoter">View Result</a></div>
     </div>

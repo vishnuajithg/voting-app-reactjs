@@ -1,4 +1,5 @@
 const Voter = require('../models/Voter');
+const Candidate = require('../models/Candidate');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -101,6 +102,20 @@ const voterHome = async (req, res,) => {
   }
   }
 
+const getApprovedCandidates = async (req, res) => {
+    try {
+      const token = req.headers.cookie.split('=')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
+      // console.log(decoded.id,"decoded")
+      const email = decoded.username;
+        const candidates = await Candidate.find();
+        console.log(candidates)
+        res.json({candidates});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
 
 const logout = async (req,res) =>{
 
@@ -135,6 +150,7 @@ module.exports = {
     loginVoter,
     voterHome,
     isApproved,
+    getApprovedCandidates,
     logout
   
   };

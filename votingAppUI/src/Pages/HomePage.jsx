@@ -7,7 +7,10 @@ const HomePage = () => {
   return (
     <>
       <NavBarCommon/>
+      {/* <div className='h-[85vh]'> */}
       <MainContentIndex />
+      {/* </div> */}
+      
       <Footer />
     </>
   )
