@@ -1,6 +1,7 @@
 const Official = require('../models/Official');
 const Voter = require('../models/Voter');
 const Candidate = require('../models/Candidate');
+const ElectionSchema = require('../models/ElectionSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -30,6 +31,7 @@ const loginOfficial = async (req, res) => {
       const { username, password } = req.body;
   
       const voter = await Official.findOne({ username });
+     
       if (!voter) {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
@@ -38,9 +40,15 @@ const loginOfficial = async (req, res) => {
       if (!isMatch) {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
+      // const ElectionSchema = await ElectionSchema.find({});
+      // if (!ElectionSchema) {
+      //   return res.status(401).json({ message: 'No election found' });
+      // }
+
+     
   
       const token = jwt.sign(
-        { id: voter._id, username: voter.username },
+        { id: voter._id, username: voter.username},
         JWT_SECRET,
         { expiresIn: '1h' }
       );
@@ -53,6 +61,7 @@ const loginOfficial = async (req, res) => {
         user: {
           id: voter._id,
           username: voter.username,
+          // electiontitle : ElectionSchema.title
         }
       });
  
@@ -81,6 +90,59 @@ const getAllCandidates = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
 }
 }
+const createElection = async (req, res) => {
+  try {
+    // console.log(req.body)
+    const { title, description, startDate, endDate } = req.body;
+    if (!title || !description || !startDate || !endDate) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Check if the start date is before the end date
+    if (startDate > endDate) {
+      return res.status(400).json({ message: 'Start date must be before end date' });
+    }
+
+    const existingElection = await ElectionSchema.findOne({ title });
+    if (existingElection) {
+      return res.status(400).json({ message: 'Election with same title already exists' });
+    }
+
+    const newElection = new ElectionSchema({ username : 'admin' ,title, description, startDate, endDate }); 
+    await newElection.save();
+    res.status(201).json({ message: 'Election created successfully' });
+  } catch (error) {
+    console.error('Error creating election:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const createdAt = async (req, res) => {
+  try {
+    // console.log(req.headers.cookie.split('=')[1])
+    const token = req.headers.cookie.split('=')[1]; 
+      if (!token) return res.status(401).json({ error: "Access denied" });
+      
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const username = decoded.username;
+
+    const electionDetails = await ElectionSchema.findOne({ username });
+    console.log(electionDetails,"rr")
+    if (!electionDetails) {
+
+      return res.status(404).json({ message: 'Election not found' });
+    } 
+    console.log()
+    if (typeof(electionDetails.createdAt) === 'object') {
+      return res.status(201).json({created:true,electionDetails});
+    } 
+
+  } catch (error) {
+    console.error('Error while checking createdAt or not :', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+
+}
 
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
@@ -92,6 +154,8 @@ module.exports = {
   loginOfficial,
     getAllVoters,
     getAllCandidates,
+    createElection,
+    createdAt,
     logout
   
   };

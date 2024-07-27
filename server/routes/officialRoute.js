@@ -3,6 +3,8 @@ const {
     loginOfficial,
     getAllVoters,
     getAllCandidates,
+    createElection,
+    createdAt,
     logout
   } = require('../controllers/officialController.js');
 
@@ -15,7 +17,9 @@ const router = express.Router();
 router.post('/loginChecker', loginOfficial);
 router.get('/getAllVoters',authenticateToken, getAllVoters);
 router.get('/getAllCandidates',authenticateToken, getAllCandidates);
-router.post("/logout", logout)
+router.post('/createElection',authenticateToken, createElection);
+router.get('/createdAt',authenticateToken,createdAt)
+router.post("/logout", logout) 
 
 
 module.exports = router;

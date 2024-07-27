@@ -1,8 +1,10 @@
-
 const mongoose = require('mongoose');
 
- 
 const electionSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -13,23 +15,32 @@ const electionSchema = new mongoose.Schema({
     },
     startDate: {
         type: Date,
-        required: true
+        required: true,
+        validate: {
+            validator: function(value) { 
+                return value < this.endDate;
+            },
+            message: 'Start date must be before end date'
+        }
     },
     endDate: {
         type: Date,
         required: true
     },
-    status: {
-        type: String,
-        required: true
-    },
-    candidates: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Candidate',
-        required: true
-    }]
+    // status: {
+    //     type: String,
+    //     required: true,
+    //     enum: ['upcoming', 'ongoing', 'completed']
+    // },
+    // candidates: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Candidate',
+    //     required: true
+    // }]
+}, {
+    timestamps: true // Automatically handles createdAt and updatedAt
 });
 
-const ElectionSchema = mongoose.model('Election', electionSchema);
+const Election = mongoose.model('Election', electionSchema);
 
-module.exports = ElectionSchema;
+module.exports = Election;
