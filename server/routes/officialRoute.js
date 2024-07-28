@@ -10,6 +10,8 @@ const {
     rejectVoter,
     approveCandidate,
     rejectCandidate,
+    deleteElection,
+    updateElection,
     logout
   } = require('../controllers/officialController.js');
 
@@ -29,6 +31,8 @@ router.post('/approveVoter/:voterId',authenticateToken,approveVoter)
 router.post('/rejectVoter/:voterId',authenticateToken,rejectVoter)
 router.post('/approveCandidate/:candidateId',authenticateToken,approveCandidate)
 router.post('/rejectCandidate/:candidateId',authenticateToken,rejectCandidate)
+router.delete('/deleteElection/:id',authenticateToken,deleteElection)
+router.put('/updateElection/:id',authenticateToken,updateElection)
 router.post("/logout", logout) 
 
 

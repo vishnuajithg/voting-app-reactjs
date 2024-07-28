@@ -223,7 +223,38 @@ const rejectCandidate  = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
+const deleteElection = async (req, res) => {
+  try {
+    console.log(req.params)
+    const electionId  = req.params.id;
+    console.log('ele',electionId)
+    const election = await ElectionSchema.findByIdAndDelete(electionId);
+    if (!election) {
+      return res.status(404).json({ message: 'Election not found' });
+    }
+    res.status(200).json({ message: 'Election deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting election:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+const updateElection = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description } = req.body;
+    const election = await ElectionSchema.findById(id);
+    if (!election) {
+      return res.status(404).json({ message: 'Election not found' });
+    }
+    election.title = title;
+    election.description = description;
+    await election.save();
+    res.status(200).json({ message: 'Election updated successfully' });
+  } catch (error) {
+    console.error('Error updating election:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
     res.status(200).send("Logout successful");
@@ -241,6 +272,8 @@ module.exports = {
     rejectVoter,
     approveCandidate,
     rejectCandidate,
+    deleteElection,
+    updateElection,
     logout
   
   };
