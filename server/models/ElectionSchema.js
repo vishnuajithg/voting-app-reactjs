@@ -27,11 +27,9 @@ const electionSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    // status: {
-    //     type: String,
-    //     required: true,
-    //     enum: ['upcoming', 'ongoing', 'completed']
-    // },
+    isActive: {
+        type: Boolean
+    },
     // candidates: [{
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Candidate',

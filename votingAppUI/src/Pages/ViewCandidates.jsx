@@ -90,7 +90,7 @@ const ViewCandidates = () => {
         <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.stream}</td>
         <td rowSpan="6" className="px-6 py-4 border-b border-gray-300 text-center ">
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-16 px-16 text-center rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-8 px-16 text-center rounded focus:outline-none focus:shadow-outline"
             onClick={handleNext}
           >
             Next
@@ -144,7 +144,7 @@ const ViewCandidates = () => {
           <p>No approved candidates</p>
         )}
 
-        <h2 className="text-2xl font-bold my-4 text-center">Pending Candidates</h2>
+        <h2 className="text-2xl font-bold my-4  text-center text-center">Pending Candidates</h2>
         {pendingCandidates.length > 0 ? (
           <div className="max-w-full overflow-x-auto">
             <table className="min-w-[70%] bg-white border border-gray-300 m-auto">

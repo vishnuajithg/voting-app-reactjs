@@ -190,6 +190,9 @@ const isApproved = async (req, res) => {
         if (voter.isApproved === true) {
           return res.status(200).json({ isApproved: true });
         }
+        else{
+            return res.status(200).json({ isApproved: false });
+        }
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Server error' });

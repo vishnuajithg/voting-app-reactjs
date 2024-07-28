@@ -14,6 +14,7 @@ const CreateElectionForm = () => {
   const [data, setData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [electionStarted, setElectionStarted] = useState();
 
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ const CreateElectionForm = () => {
         const result = await res.json();
         setShowData(result.created);
         setData(result.electionDetails);
+        setElectionStarted(result.electionDetails.isActive)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -31,10 +33,11 @@ const CreateElectionForm = () => {
     fetchData();
   },[refresh]);
 
-  const handleStop = async () => {
+  const handleStop = async (id) => {
     try {
-      const response = await fetch('/api/official/stopElection', {
-        method: 'POST',
+      console.log(id)
+      const response = await fetch(`/api/official/stopElection/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -42,6 +45,7 @@ const CreateElectionForm = () => {
 
       if (response.ok) {
         alert('Election stopped successfully');
+        setElectionStarted(false);
         navigate('/electionStartsStops');
       } else {
         alert('Error stopping election');
@@ -51,10 +55,10 @@ const CreateElectionForm = () => {
     }
   };
 
-  const handleStart = async () => {
+  const handleStart = async (id) => {
     try {
-      const response = await fetch('/api/official/startElection', {
-        method: 'POST',
+      const response = await fetch(`/api/official/startElection/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -62,6 +66,7 @@ const CreateElectionForm = () => {
 
       if (response.ok) {
         alert('Election started successfully');
+        setElectionStarted(true);
         navigate('/electionStartsStops');
       } else {
         alert('Error starting election');
@@ -106,6 +111,7 @@ const CreateElectionForm = () => {
 
       if (res.ok) {
         alert('Election created successfully');
+        setRefresh(!refresh); 
         navigate('/electionStartsStops');
       } else {
         alert('Error creating election');
@@ -134,6 +140,7 @@ const CreateElectionForm = () => {
       if (response.ok) {
         alert('Election updated successfully');
         setIsEditing(false);
+        setRefresh(!refresh); 
         navigate('/electionStartsStops');
       } else {
         alert('Error updating election');
@@ -152,7 +159,7 @@ const CreateElectionForm = () => {
           {showData ? (
             <>
               <div className="mt-6">
-                <h2 className="text-xl font-bold mb-4">Election Data</h2>
+                <h2 className="text-xl font-bold mb-4"> Update Election Data</h2>
                 <table className="min-w-full bg-white border border-gray-300">
                   <thead className="bg-[#409D9B] text-white">
                     <tr>
@@ -160,7 +167,8 @@ const CreateElectionForm = () => {
                       <th className="px-6 py-4 border-b border-gray-300">Description</th>
                       <th className="px-6 py-4 border-b border-gray-300">Start Date</th>
                       <th className="px-6 py-4 border-b border-gray-300">End Date</th>
-                      <th className="px-6 py-4 border-b border-gray-300">Actions</th>
+                      <th className="px-6 py-4 border-b border-gray-300 text-center">Save</th>
+                      <th className="px-6 py-4 border-b border-gray-300 text-center">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -228,13 +236,13 @@ const CreateElectionForm = () => {
                             Edit
                           </button>
                         )}
-                        <button
+                      </td>
+                      <td><button
                           onClick={() => handleDelete(data._id)}
                           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                         >
                           Delete
-                        </button>
-                      </td>
+                        </button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -243,12 +251,24 @@ const CreateElectionForm = () => {
               <br />
               <div className='flex flex-rows gap-5 justify-center'>
                 <div className="mb-4">
-                  <button onClick={handleStart} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline">Start Election</button>
+                  <button onClick={()=>handleStart(data._id)} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline">Start Election</button>
                 </div>
                 <div className="mb-4">
-                  <button onClick={handleStop} className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline">Stop Election</button>
+                  <button onClick={()=>handleStop(data._id)}  className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline">Stop Election</button>
+                  {/* onClick={handleStop(data._id)} */}
                 </div>
               </div>
+              {electionStarted && (
+              <div className="alert alert-success animate-pulse   bg-red-600 text-white text-center p-3 mt-4 text-3xl font-bold rounded rounded-md">
+                The Election is live!
+              </div>  
+)}
+        {!electionStarted && (
+          <div className="bg-green-600 text-white text-xl p-3 text-center mt-4 font-bold rounded-md">
+            The Election Has Not Started Yet. Please Start The Election.  
+          </div>
+        )}
+              <br />
               <br />
             </>
           ) :

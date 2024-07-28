@@ -13,6 +13,7 @@ const VoteCast = () => {
     const [candidates, setCandidates] = useState([]);
     const [showData, setShowData] = useState(false);
     // const [data, setData] = useState(null);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         const fetchCandidates = async () => {
@@ -39,14 +40,18 @@ const VoteCast = () => {
             }
         };
         fetchCandidates()
-    },[]);
+    },[refresh]);
     // console.log(typeof(candidates))
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const selectedValue = selectRef.current.value;
         console.log(selectedValue);
+        if (!window.confirm("Ensure you have selected a candidate correctly?")) {
+            return;
+        }
         handleVote()
+        
     }
 
     
@@ -64,22 +69,32 @@ const VoteCast = () => {
             };
             // const electionTitle = electionData.title;
             // console.log(electionTitle);
-            const response = await fetch('/api/voter/castVote', { 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            const result = await response.json();
-            // const hasVoted =  await fetch('/api/voter/hasVoted', { 
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     }
-            // });
-            console.log(result);
-
+            const isApproved = await fetch('/api/voter/isApproved');
+            const resultJson = await isApproved.json();
+            console.log(resultJson.isApproved);
+            if (resultJson.isApproved === false) {
+                alert("Please wait for the admin to approve your vote");
+                return;
+            }else{
+                const response = await fetch('/api/voter/castVote', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                // const hasVoted =  await fetch('/api/voter/hasVoted', { 
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     }
+                // });
+                console.log(result);
+                alert("Voted successfully");
+                setRefresh(!refresh);
+            }
+            setRefresh(!refresh);
         } catch (error) {
             console.error(error);
         }

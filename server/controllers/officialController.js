@@ -109,7 +109,7 @@ const createElection = async (req, res) => {
       return res.status(400).json({ message: 'Election with same title already exists' });
     }
 
-    const newElection = new ElectionSchema({ username : 'admin' ,title, description, startDate, endDate }); 
+    const newElection = new ElectionSchema({ username : 'admin' ,title, description, startDate, endDate, isActive: true }); 
     await newElection.save();
     res.status(201).json({ message: 'Election created successfully' });
   } catch (error) {
@@ -255,6 +255,32 @@ const updateElection = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 }
+const startElection = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedElection = await ElectionSchema.findByIdAndUpdate(id, { isActive: true });
+    if (!updatedElection) {
+      return res.status(404).json({ message: 'Election not found' });
+    }
+    res.status(200).json({ message: 'Election stopped successfully' });
+  } catch (error) {
+    console.error('Error stopping election:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+const stopElection  = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedElection = await ElectionSchema.findByIdAndUpdate(id, { isActive: false });
+    if (!updatedElection) {
+      return res.status(404).json({ message: 'Election not found' });
+    }
+    res.status(200).json({ message: 'Election stopped successfully' });
+  } catch (error) {
+    console.error('Error stopping election:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
     res.status(200).send("Logout successful");
@@ -274,6 +300,8 @@ module.exports = {
     rejectCandidate,
     deleteElection,
     updateElection,
+    startElection,
+    stopElection,
     logout
   
   };

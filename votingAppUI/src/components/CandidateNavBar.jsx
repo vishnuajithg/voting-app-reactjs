@@ -11,9 +11,9 @@ const CandidateNavBar = () => {
         <div className="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/CandidateProposal">Upload Your Proposals</a></div>
         <div className="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/viewResultCandidate">View Results</a></div>
     </div>
-    <div className="  bg-[#F4F5F7] text-red-700 h-[30px]">
+    <div className="  bg-[#F4F5F7] text-red-700 p-1 text-center h-[30px]">
         <div className="flex flex-row"> 
-            <marquee behavior="" direction=""><p className="">Annoucement</p></marquee>
+            <marquee behavior="" direction=""><p className="">Please complete the registration form to finalize your candidate registration. Once you have completed the form, you can check your approval status to see if you have been approved by the official side</p></marquee>
         </div>
     </div>
 </div>
