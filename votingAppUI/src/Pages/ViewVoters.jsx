@@ -9,6 +9,46 @@ const ViewVoters = () => {
 
     const [voters, setVoters] = useState([]);
 
+    const handleReject = async (voterId) => {
+        try {
+            const response = await fetch(`/api/official/rejectVoter/${voterId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                // Fetch updated voters list
+                fetchVoters();
+            } else {
+                console.error('Failed to reject voter');
+            }
+        } catch (error) {
+            console.error('Error during rejection:', error);
+        }
+    }
+    const handleApproval = async (voterId) => {
+        try {
+            const response = await fetch(`/api/official/approveVoter/${voterId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                // Fetch updated voters list
+                fetchVoters();
+            } else {
+                console.error('Failed to approve voter');
+            }
+        } catch (error) {
+            console.error('Error during approval:', error);
+        }
+    };
+
+
     useEffect(() => {
         const fetchVoters = async (req,res) => {
             try {
@@ -47,8 +87,8 @@ const ViewVoters = () => {
                                 <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{voter.email}</td>
                                 <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{voter.year}</td>
                                 <td className="px-6 py-4 border-b border-gray-300">
-                                    <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">Approve</button>
-                                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reject</button>
+                                    <button onClick={handleApproval} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">Approve</button>
+                                    <button onClick={handleReject} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reject</button>
                                 </td>
                             </tr>
                         ))}

@@ -2,6 +2,7 @@ const Official = require('../models/Official');
 const Voter = require('../models/Voter');
 const Candidate = require('../models/Candidate');
 const ElectionSchema = require('../models/ElectionSchema');
+const VoteCast = require('../models/VoteCast');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -143,6 +144,24 @@ const createdAt = async (req, res) => {
   }
 
 }
+// app.get('/api/candidate-counts',
+const viewResult = async (req, res) => {
+  try {
+    const candidateCounts = await VoteCast.aggregate([
+      {
+        $group: {
+          _id: '$candidateName',
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    res.json(candidateCounts);
+  } catch (error) {
+    console.error('Error fetching candidate counts:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
@@ -156,6 +175,7 @@ module.exports = {
     getAllCandidates,
     createElection,
     createdAt,
+    viewResult,
     logout
   
   };

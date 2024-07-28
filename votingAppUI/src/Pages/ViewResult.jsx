@@ -1,32 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const ViewResult = () => {
+  const [candidateCounts, setCandidateCounts] = useState([]);
+
+  useEffect(() => {
+    const fetchCandidateCounts = async () => {
+      try {
+        const response = await fetch('/api/official/viewResult');
+        const data = await response.json();
+        setCandidateCounts(data);
+      } catch (error) {
+        console.error('Error fetching candidate counts:', error);
+      }
+    };
+
+    fetchCandidateCounts();
+  }, []);
+
   return (
     <>
-    <br />
-           <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl m-auto">
-    <h1 class="text-4xl font-extrabold text-gray-800 mb-8 text-center">Election Results</h1>
-    <div class="flex justify-around items-end h-[80%] w-[80%] m-auto">
-        <div class="flex flex-col items-center ">
-            <div id="candidate1Bar" class="px-10 py-[70%] bg-violet-600"></div>
-            <div class="text-xl font-semibold text-gray-800 mt-2">Candidate 1</div>
-            <div id="candidate1Votes" class="text-lg font-bold text-gray-700">150 Votes</div>
-        </div>
-        <div class="flex flex-col items-center">
-            <div id="candidate2Bar" class="px-10 py-[100%] bg-yellow-600"></div>
-            <div class="text-xl font-semibold text-gray-800 mt-2">Candidate 2</div>
-            <div id="candidate2Votes" class="text-lg font-bold text-gray-700">230 Votes</div>
-        </div>
-        <div class="flex flex-col items-center">
-            <div id="candidate3Bar" class="px-10 py-[50%] bg-cyan-600"></div>
-            <div class="text-xl font-semibold text-gray-800 mt-2">Candidate 3</div>
-            <div id="candidate3Votes" class="text-lg font-bold text-gray-700">120 Votes</div>
-        </div>
+    <div className="flex items-center justify-center">
+      <table className="min-w-[70%] bg-white border border-gray-300 m-auto">
+        <thead className="bg-[#409D9B] text-white">
+          <tr>
+            <th className="px-6 py-4 border-b border-gray-300 text-gray-700">Candidate Name</th>
+            <th className="px-6 py-4 border-b border-gray-300 text-gray-700">Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {candidateCounts.map((candidate) => (
+            <tr key={candidate._id}>
+              <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate._id}</td>
+              <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.count}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-</div>
-<br />
+    <br />
+    <br />
     </>
-  )
-}
+  );
+};
 
-export default ViewResult
+export default ViewResult;
