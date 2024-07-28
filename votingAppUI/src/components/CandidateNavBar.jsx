@@ -8,7 +8,7 @@ const CandidateNavBar = () => {
         <div className="bg-[#FDE9C9] m-2 p-2 rounded-md"><a href="/CandidateHome">HOME</a></div>
         <div className="bg-[#DBF094] m-2 p-2 rounded-md"><a href="/CompleteRegistrationCandidate">Complete Registration</a></div>
         <div className="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/CandidateAppStatus">View Approval Status</a></div>
-        <div className="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/CandidateProposal">Upload Your Proposals</a></div>
+        {/* <div className="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/CandidateProposal">Upload Your Proposals</a></div> */}
         <div className="bg-[#DBF094]  m-2 p-2 rounded-md"><a href="/viewResultCandidate">View Results</a></div>
     </div>
     <div className="  bg-[#F4F5F7] text-red-700 p-1 text-center h-[30px]">

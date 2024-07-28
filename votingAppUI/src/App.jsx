@@ -16,7 +16,7 @@ import ForOfficials from './Pages/ForOfficials'
 import CandidateHome from './Pages/CandidateHome';
 import CompleteRegistrationCandidate from './Pages/CompleteRegistrationCandidate';
 import CandidateAppStatus from './Pages/CandidateAppStatus';
-import CandidateProposal from './Pages/CandidateProposal';
+// import CandidateProposal from './Pages/CandidateProposal';
 import VoterHome from './Pages/VoterHome';
 import VoterAppStatus from './Pages/VoterAppStatus';
 import OfficialsHome from './Pages/OfficialsHome';
@@ -47,7 +47,7 @@ const App = () => {
         <Route path='/candidateRegistrationForm' element={<CandidateRegistrationForm/>}/>
         <Route path='/CompleteRegistrationCandidate' element={<CompleteRegistrationCandidate/>}/>
         <Route path='/CandidateAppStatus' element={<CandidateAppStatus/>}/>
-        <Route path='/CandidateProposal' element={<CandidateProposal/>}/>
+        {/* <Route path='/CandidateProposal' element={<CandidateProposal/>}/> */}
         <Route path='/viewResultCandidate' element={<ViewResultCandidate/>}/>
 
       </Route>

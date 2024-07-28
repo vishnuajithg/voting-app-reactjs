@@ -198,6 +198,21 @@ const isApproved = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 }
+// isElectionStarted
+const isElectionStarted = async(req, res) => {
+  try {
+    // const { id } = req.params;
+    const election = await ElectionSchema.findOne({ username: 'admin' })
+    console.log({election})
+    if (!election) {
+      return res.status(404).json({ message: 'Election not found' });
+    }
+    res.status(200).json(election);
+  } catch (error) {
+    console.error('Error stopping election:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
 module.exports = {
     registerVoter,
     loginVoter,
@@ -207,6 +222,7 @@ module.exports = {
     getElectionDetails,
     castVote,
     hasVoted,
+    isElectionStarted,
     logout
   
   };

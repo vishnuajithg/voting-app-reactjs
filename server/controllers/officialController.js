@@ -71,6 +71,25 @@ const loginOfficial = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
   };
+const stat = async (req, res) => {
+  try {
+    const votersApproved = await Voter.countDocuments({ isApproved: true });
+    const votersRejected = await Voter.countDocuments({ isApproved: false });
+    const candidatesApproved = await Candidate.countDocuments({ isApproved: true });
+    const candidatesRejected = await Candidate.countDocuments({ isApproved: false });
+    const electionStatus = await ElectionSchema.findOne({}).select('title');// Adjust the query as necessary
+    console.log(electionStatus)
+    res.json({
+      votersApproved,
+      votersRejected,
+      candidatesApproved,
+      candidatesRejected,
+      currentElectionStatus: electionStatus ? electionStatus.title : 'No active election',
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 const getAllVoters = async (req, res) => {
   try {
@@ -289,6 +308,7 @@ const logout = async (req,res) =>{
 
 module.exports = {
   loginOfficial,
+  stat,
     getAllVoters,
     getAllCandidates,
     createElection,
@@ -305,3 +325,5 @@ module.exports = {
     logout
   
   };
+
+  

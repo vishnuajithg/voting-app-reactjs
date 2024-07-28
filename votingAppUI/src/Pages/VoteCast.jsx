@@ -21,6 +21,7 @@ const VoteCast = () => {
                
                 // console.log("showData",showData);
                 // setData(result.candidate);
+                
 
                 const response = await fetch('/api/voter/getApprovedCandidates');
                 console.log(response);
@@ -71,7 +72,13 @@ const VoteCast = () => {
             // console.log(electionTitle);
             const isApproved = await fetch('/api/voter/isApproved');
             const resultJson = await isApproved.json();
-            console.log(resultJson.isApproved);
+            const electionStarted = await fetch('/api/voter/isElectionStarted');
+            const isElectionStarted = await electionStarted.json();
+            console.log('electionstarted',isElectionStarted.isActive);
+            if(isElectionStarted.isActive === false){
+                alert("Please wait for the election to start");
+                return;
+            }
             if (resultJson.isApproved === false) {
                 alert("Please wait for the admin to approve your vote");
                 return;

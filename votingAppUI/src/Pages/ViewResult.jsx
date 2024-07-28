@@ -19,6 +19,7 @@ const ViewResult = () => {
 
   return (
     <>
+    <br /><br />
     <div className="flex items-center justify-center">
       <table className="min-w-[70%] bg-white border border-gray-300 m-auto">
         <thead className="bg-[#409D9B] text-white">
@@ -38,7 +39,8 @@ const ViewResult = () => {
       </table>
     </div>
     <br />
-    <br />
+    <br /><br /><br />
+    <br /><br /><br /><br /><br />
     </>
   );
 };

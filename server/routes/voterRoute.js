@@ -8,6 +8,7 @@ const {
     getElectionDetails,
     castVote,
     hasVoted,
+    isElectionStarted,
     logout
   } = require('../controllers/voterController.js');
 
@@ -25,5 +26,6 @@ router.get('/getElectionDetails',authenticateToken, getElectionDetails);
 router.get('/isApproved',authenticateToken, isApproved);
 router.post('/castVote',authenticateToken,castVote)
 router.get('/hasVoted',authenticateToken,hasVoted)
+router.get('/isElectionStarted',authenticateToken,isElectionStarted)
 router.post("/logout", logout)
 module.exports = router;

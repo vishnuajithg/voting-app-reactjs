@@ -31,7 +31,9 @@ const CandidateHome = () => {
         <CandidateNavBar2/>
         <CandidateNavBar />
         
-        <div>
+        <div >
+            <br />
+            <br />
     <h1 className="text-left ml-[15%] mt-[-10px] text-[20px]">Welcome back,<span className="font-black text-[20px]"> {name}</span>  </h1>
 </div>
 
@@ -53,6 +55,18 @@ const CandidateHome = () => {
         </tr>
     </tbody>
 </table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <br />
         <Footer />
     </>

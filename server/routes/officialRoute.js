@@ -1,6 +1,7 @@
 const express = require('express');
 const {
     loginOfficial,
+    stat,
     getAllVoters,
     getAllCandidates,
     createElection,
@@ -24,6 +25,7 @@ const  authenticateToken  = require('../Middleware/auth.js');
 const router = express.Router();
 
 router.post('/loginChecker', loginOfficial);
+router.get('/stat',authenticateToken, stat);
 router.get('/getAllVoters',authenticateToken, getAllVoters);
 router.get('/getAllCandidates',authenticateToken, getAllCandidates);
 router.post('/createElection',authenticateToken, createElection);

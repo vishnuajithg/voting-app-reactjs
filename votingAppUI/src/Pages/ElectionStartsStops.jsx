@@ -154,6 +154,7 @@ const CreateElectionForm = () => {
     <>
       <OfficialNavBar />
       <OfficialNavBar2 />
+      <br />
       <div className="flex items-center justify-center">
         <div className="w-[70%] m-auto items-center">
           {showData ? (
@@ -331,6 +332,8 @@ const CreateElectionForm = () => {
         
       </div>
     </div>
+    <br /><br /><br />
+    <br />
     <Footer />
   </>
   );
