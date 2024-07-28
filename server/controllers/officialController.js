@@ -193,6 +193,36 @@ const rejectVoter = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+const approveCandidate  = async (req, res) => {
+  try {
+    const { candidateId } = req.params;
+    const candidate = await Candidate.findById(candidateId);
+    if (!candidate) {
+      return res.status(404).json({ message: 'Candidate not found' });
+    }
+    candidate.isApproved = true;
+    await candidate.save();
+    res.status(200).json({ message: 'Candidate approved successfully' });
+  } catch (error) {
+    console.error('Error approving candidate:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+const rejectCandidate  = async (req, res) => {
+  try {
+    const { candidateId } = req.params;
+    const candidate = await Candidate.findById(candidateId);
+    if (!candidate) {
+      return res.status(404).json({ message: 'Candidate not found' });
+    }
+    candidate.isApproved = false;
+    await candidate.save();
+    res.status(200).json({ message: 'Candidate rejected successfully' });
+  } catch (error) {
+    console.error('Error rejecting candidate:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
@@ -209,6 +239,8 @@ module.exports = {
     viewResult,
     approveVoter,
     rejectVoter,
+    approveCandidate,
+    rejectCandidate,
     logout
   
   };

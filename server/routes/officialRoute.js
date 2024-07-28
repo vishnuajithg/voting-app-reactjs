@@ -8,6 +8,8 @@ const {
     viewResult,
     approveVoter,
     rejectVoter,
+    approveCandidate,
+    rejectCandidate,
     logout
   } = require('../controllers/officialController.js');
 
@@ -25,6 +27,8 @@ router.get('/createdAt',authenticateToken,createdAt)
 router.get('/viewResult',authenticateToken,viewResult)
 router.post('/approveVoter/:voterId',authenticateToken,approveVoter)
 router.post('/rejectVoter/:voterId',authenticateToken,rejectVoter)
+router.post('/approveCandidate/:candidateId',authenticateToken,approveCandidate)
+router.post('/rejectCandidate/:candidateId',authenticateToken,rejectCandidate)
 router.post("/logout", logout) 
 
 
