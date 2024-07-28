@@ -163,6 +163,37 @@ const viewResult = async (req, res) => {
   }
 };
 
+const approveVoter = async (req, res) => {
+  try {
+    const { voterId } = req.params;
+    const voter = await Voter.findById(voterId);
+    if (!voter) {
+      return res.status(404).json({ message: 'Voter not found' });
+    }
+    voter.isApproved = true;
+    await voter.save();
+    res.status(200).json({ message: 'Voter approved successfully' });
+  } catch (error) {
+    console.error('Error approving voter:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+const rejectVoter = async (req, res) => {
+  try {
+    const { voterId } = req.params;
+    const voter = await Voter.findById(voterId);
+    if (!voter) {
+      return res.status(404).json({ message: 'Voter not found' });
+    }
+    voter.isApproved = false;
+    await voter.save();
+    res.status(200).json({ message: 'Voter rejected successfully' });
+  } catch (error) {
+    console.error('Error rejecting voter:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 const logout = async (req,res) =>{
     res.clearCookie("authToken");
     res.status(200).send("Logout successful");
@@ -176,6 +207,8 @@ module.exports = {
     createElection,
     createdAt,
     viewResult,
+    approveVoter,
+    rejectVoter,
     logout
   
   };
