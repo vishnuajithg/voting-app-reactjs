@@ -69,52 +69,57 @@ const ViewCandidates = () => {
 
   const renderCandidateDetails = (candidate, handleNext, showApproveButton) => (
     <React.Fragment key={candidate._id}>
-      <tr className="bg-gray-50">
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Name</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.name}</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-center">
-          {showApproveButton && (
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
-              onClick={() => handleApprove(candidate._id)}
-            >
-              Approve
-            </button>
-          )}
-          
-          <button onClick={() => handleReject(candidate._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reject</button>
-        </td>
-      </tr>
-      <tr className="bg-white">
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Stream of Studying</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.stream}</td>
-        <td rowSpan="6" className="px-6 py-4 border-b border-gray-300 text-center ">
-          <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-8 px-16 text-center rounded focus:outline-none focus:shadow-outline"
-            onClick={handleNext}
-          >
-            Next
-          </button>
-        </td>
-      </tr>
-      <tr className="bg-gray-50">
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Year of Studying</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.year}</td>
-      </tr>
-      <tr className="bg-white">
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Age</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.age}</td>
-      </tr>
-      <tr className="bg-gray-50">
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Symbol</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.symbol}</td>
-      </tr>
-      <tr className="bg-white">
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Date of Birth</td>
-        <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
-          {new Date(candidate.dob).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}
-        </td>
-      </tr>
+     <tr className="bg-gray-50 hover:bg-gray-100">
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Name</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.name}</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-center">
+    {showApproveButton && (
+      <button
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+        onClick={() => handleApprove(candidate._id)}
+      >
+        Approve
+      </button>
+    )}
+    <button
+      onClick={() => handleReject(candidate._id)}
+      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      Reject
+    </button>
+  </td>
+</tr>
+<tr className="bg-white hover:bg-gray-50">
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Stream of Studying</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.stream}</td>
+  <td rowSpan="6" className="px-6 py-4 border-b border-gray-300 text-center">
+    <button
+      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded focus:outline-none focus:shadow-outline"
+      onClick={handleNext}
+    >
+      View Next Candidate
+    </button>
+  </td>
+</tr>
+<tr className="bg-gray-50 hover:bg-gray-100">
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Year of Studying</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.year}</td>
+</tr>
+<tr className="bg-white hover:bg-gray-50">
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Age</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.age}</td>
+</tr>
+<tr className="bg-gray-50 hover:bg-gray-100">
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Symbol</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{candidate.symbol}</td>
+</tr>
+<tr className="bg-white hover:bg-gray-50">
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Date of Birth</td>
+  <td className="px-6 py-4 border-b border-gray-300 text-gray-700">
+    {new Date(candidate.dob).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+  </td>
+</tr>
+
     </React.Fragment>
   );
   // #409D9B
@@ -127,18 +132,19 @@ const ViewCandidates = () => {
         <h2 className="text-2xl font-bold my-4 text-center">Approved Candidates</h2>
         {approvedCandidates.length > 0 ? (
           <div className="max-w-full overflow-x-auto mb-8">
-            <table className="min-w-[70%] bg-white border border-gray-300 rounded rounded-lg m-auto ">
-              <thead className="bg-green-600 text-white">
-                <tr>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Candidate Detail</th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Information</th>
-                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {approvedCandidates[approvedIndex] && renderCandidateDetails(approvedCandidates[approvedIndex], handleNextApproved, false)}
-              </tbody>
-            </table>
+           <table className="min-w-[70%] bg-white border border-gray-300 shadow-md rounded-lg m-auto overflow-hidden">
+  <thead className="bg-green-500 text-white">
+    <tr>
+      <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Candidate Detail</th>
+      <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Information</th>
+      <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {approvedCandidates[approvedIndex] && renderCandidateDetails(approvedCandidates[approvedIndex], handleNextApproved, false)}
+  </tbody>
+</table>
+
           </div>
         ) : (
           <p>No approved candidates</p>

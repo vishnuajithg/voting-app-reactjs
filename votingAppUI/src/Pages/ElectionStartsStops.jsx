@@ -161,92 +161,95 @@ const CreateElectionForm = () => {
             <>
               <div className="mt-6">
                 <h2 className="text-xl font-bold mb-4"> Update Election Data</h2>
-                <table className="min-w-full bg-white border border-gray-300">
-                  <thead className="bg-[#409D9B] text-white">
-                    <tr>
-                      <th className="px-6 py-4 border-b border-gray-300">Title</th>
-                      <th className="px-6 py-4 border-b border-gray-300">Description</th>
-                      <th className="px-6 py-4 border-b border-gray-300">Start Date</th>
-                      <th className="px-6 py-4 border-b border-gray-300">End Date</th>
-                      <th className="px-6 py-4 border-b border-gray-300 text-center">Save</th>
-                      <th className="px-6 py-4 border-b border-gray-300 text-center">Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="px-6 py-4 border-b border-gray-300">
-                        {isEditing ? (
-                          <input
-                            type="text"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          />
-                        ) : (
-                          data.title
-                        )}
-                      </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
-                        {isEditing ? (
-                          <textarea
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          />
-                        ) : (
-                          data.description
-                        )}
-                      </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
-                        {isEditing ? (
-                          <input
-                            type="datetime-local"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          />
-                        ) : (
-                          new Date(data.startDate).toLocaleString('en-GB', { hour12: true })
-                        )}
-                      </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
-                        {isEditing ? (
-                          <input
-                            type="datetime-local"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          />
-                        ) : (
-                          new Date(data.endDate).toLocaleString('en-GB', { hour12: true })
-                        )}
-                      </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
-                        {isEditing ? (
-                          <button
-                            onClick={() => handleUpdate(data._id)}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          >
-                            Save
-                          </button>
-                        ) : (
-                          <button
-                            onClick={handleEdit}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          >
-                            Edit
-                          </button>
-                        )}
-                      </td>
-                      <td><button
-                          onClick={() => handleDelete(data._id)}
-                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                          Delete
-                        </button></td>
-                    </tr>
-                  </tbody>
-                </table>
+                <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg overflow-hidden">
+  <thead className="bg-[#409D9B] text-white">
+    <tr>
+      <th className="px-6 py-4 border-b border-gray-300 text-left">Title</th>
+      <th className="px-6 py-4 border-b border-gray-300 text-left">Description</th>
+      <th className="px-6 py-4 border-b border-gray-300 text-left">Start Date</th>
+      <th className="px-6 py-4 border-b border-gray-300 text-left">End Date</th>
+      <th className="px-6 py-4 border-b border-gray-300 text-center">Save</th>
+      <th className="px-6 py-4 border-b border-gray-300 text-center">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="px-6 py-4 border-b border-gray-300">
+        {isEditing ? (
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        ) : (
+          data.title
+        )}
+      </td>
+      <td className="px-6 py-4 border-b border-gray-300">
+        {isEditing ? (
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        ) : (
+          data.description
+        )}
+      </td>
+      <td className="px-6 py-4 border-b border-gray-300">
+        {isEditing ? (
+          <input
+            type="datetime-local"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        ) : (
+          new Date(data.startDate).toLocaleString('en-GB', { hour12: true })
+        )}
+      </td>
+      <td className="px-6 py-4 border-b border-gray-300">
+        {isEditing ? (
+          <input
+            type="datetime-local"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        ) : (
+          new Date(data.endDate).toLocaleString('en-GB', { hour12: true })
+        )}
+      </td>
+      <td className="px-6 py-4 border-b border-gray-300 text-center">
+        {isEditing ? (
+          <button
+            onClick={() => handleUpdate(data._id)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            onClick={handleEdit}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Edit
+          </button>
+        )}
+      </td>
+      <td className="px-6 py-4 border-b border-gray-300 text-center">
+        <button
+          onClick={() => handleDelete(data._id)}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
               </div>
 
               <br />
