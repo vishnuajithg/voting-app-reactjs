@@ -89,10 +89,7 @@ or
 - If you are a candidate, you can view the voters and apply to run in the election
 - If you are an official, you can view the candidates and voters, and start and stop the election
 
-## Screenshots
+## Video Demonstration & Flowchart: 
+https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing
+- [Login Page](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/votingAppUI/src/assets/img/undraw_candidate_ubwv.svg)
 
-- [Login Page](https://github.com/vishnuaag/voting-app/blob/main/screenshots/login.png)
-- [Voter Home Page](https://github.com/vishnuaag/voting-app/blob/main/screenshots/voter-home.png)
-- [Candidate Home Page](https://github.com/vishnuaag/voting-app/blob/main/screenshots/candidate-home.png)
-- [Official Home Page](https://github.com/vishnuaag/voting-app/blob/main/screenshots/official-home.png)
-- [Election Results Page](https://github.com/vishnuaag/voting-app/blob/main/screenshots/election-results.png)
