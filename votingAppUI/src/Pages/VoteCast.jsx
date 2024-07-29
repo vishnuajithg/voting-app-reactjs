@@ -48,9 +48,7 @@ const VoteCast = () => {
         e.preventDefault();
         const selectedValue = selectRef.current.value;
         console.log(selectedValue);
-        if (!window.confirm("Ensure you have selected a candidate correctly?")) {
-            return;
-        }
+        
         handleVote()
         
     }
@@ -77,6 +75,9 @@ const VoteCast = () => {
             console.log('electionstarted',isElectionStarted.isActive);
             if(isElectionStarted.isActive === false){
                 alert("Please wait for the election to start");
+                return;
+            }
+            if (!window.confirm(`Are you sure you want to cast your vote for [${selectedValue}]? Press OK to confirm.`)) {
                 return;
             }
             if (resultJson.isApproved === false) {
@@ -131,21 +132,46 @@ const VoteCast = () => {
               </> 
                 :
               <>
-           <div class="bg-white p-10 rounded-lg shadow-2xl w-full max-w-xl m-auto">
+<div class="mx-[15%] flex gap-4">
+<div class="w-1/2 bg-white border border-gray-300 rounded-lg shadow-md p-6">
+    <h2 class="text-xl font-bold mb-4 text-center">Instructions for Voters</h2>
+    <ol class="list-decimal list-inside space-y-4 text-gray-700">
+        <li>
+            <strong>Check Approval Status:</strong> Before you can vote, ensure that your registration has been approved by the officials. Regularly check the Approval Status tab or contact the officials if your status is not updated in time.
+        </li>
+        <li>
+            <strong>View Candidates:</strong> Once approved and the election period has started, you can view the list of candidates who are competing in the election.
+        </li>
+        <li>
+            <strong>Cast Your Vote:</strong> Carefully vote for your preferred candidates, ensuring that you make no mistakes in your selections.
+        </li>
+        <li>
+            <strong>Check Results:</strong> After the election ends, visit the Results tab to see the outcome of the election.
+        </li>
+    </ol>
+</div>
+    <div class="w-1/2 mx-auto my-auto bg-white p-10 rounded-lg shadow-2xl">
         <h1 class="text-3xl font-extrabold text-[#172B4D] mb-6 text-center">Cast Your Vote</h1>
         
             <select
             ref={selectRef} 
-                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-white border border-gray-200 rounded shadow appearance-none focus:outline-none focus:bg-white focus:border-gray-500 mt-1 text-sm font-sans"
-                defaultValue="" name="select"><option value="" disabled>Select the candidate</option>
+                class="block w-full px-4 py-3 pr-8 leading-loose text-lg font-semibold text-gray-700 bg-white border border-gray-200 rounded shadow appearance-none focus:outline-none focus:bg-white focus:border-gray-500 mt-1 select-sm"
+                style={{fontFamily: 'Helvetica'}}
+                defaultValue="" name="select">
+                <option value="" disabled className="text-gray-500 text-center py-2">Select the candidate</option>
+                <optgroup label="Candidates List">
                 {candidates.map((candidate) => (
-                    <option key={candidate._id} value={candidate.name}>{candidate.name}</option>
+                    <option key={candidate._id} value={candidate.name} className="text-gray-700 font-semibold py-4">{candidate.name} <span>- {candidate.stream}</span></option>
                 ))}
+                </optgroup>
             </select>
             <br />
-            <button type="submit" onClick={handleSubmit} class="w-full bg-[#409D9B] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-400 transition duration-300">Submit Vote</button>
+            <button type="submit" onClick={handleSubmit} class="w-full bg-[#409D9B] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-400 transition duration-300 mx-auto">Submit Vote</button>
         
     </div>
+   
+</div>
+
             </>}
 
     {/*  */}

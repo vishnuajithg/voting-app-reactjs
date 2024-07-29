@@ -17,7 +17,7 @@ const CandidateHome = () => {
         // Do something with the user details
         console.log(data)
         setName(data.name);
-        setDob(new Date(data.dob).toISOString().split('T')[0]);
+        // setDob(new Date(data.dob).toISOString().split('T')[0]);
       };
   
       fetchUserDetails();
@@ -34,40 +34,38 @@ const CandidateHome = () => {
         <div >
             <br />
             <br />
-    <h1 className="text-left ml-[15%] mt-[-10px] text-[20px]">Welcome back,<span className="font-black text-[20px]"> {name}</span>  </h1>
+    <h1 className="mt-[-20px] text-center text-[25px] font-bold">Welcome back,<span className="font-black text-blue-500 text-[30px]"> {name.toUpperCase()}!</span>  </h1>
+</div>
+<br /><br />
+<div class="w-[50%] mx-auto bg-white border border-gray-300 rounded-lg shadow-md p-6">
+    <h2 class="text-xl font-bold mb-4 text-center">Instructions for Candidates</h2>
+    <ol class="list-decimal list-inside space-y-4 text-gray-700">
+        <li>
+            <strong>Complete Registration:</strong> Ensure that you fill out the registration form thoroughly and accurately. Include all required details and double-check for any errors before submission. Submit your registration form for review.
+        </li>
+        <li>
+            <strong>Wait for Approval:</strong> After submission, your registration will be reviewed by the officials. Regularly check the Approval Status tab to see if your registration has been approved. If not approved, please contact the officials for assistance.
+        </li>
+        <li>
+            <strong>Register as a Voter:</strong> Ensure that you are registered as a voter to participate in the election.
+        </li>
+        <li>
+            <strong>Election Starts:</strong> Once the election period officially begins, you are eligible to participate. Make sure to adhere to all election guidelines and regulations during this period.
+        </li>
+        <li>
+            <strong>Check Results:</strong> After the election period ends, visit the Results tab to view the outcome of the election.
+        </li>
+    </ol>
 </div>
 
-<table className="min-w-[70%] bg-white border border-gray-300 m-auto">
-    <thead className="bg-[#409D9B] text-white">
-        <tr>
-            <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Detail</th>
-            <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Information</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr className="bg-gray-50">
-            <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Name</td>
-            <td className="px-6 py-4 border-b border-gray-300 text-gray-700 ">{name}</td>
-        </tr>
-        <tr className="bg-white">
-            <td className="px-6 py-4 border-b border-gray-300 text-gray-700">Date of Birth</td>
-            <td className="px-6 py-4 border-b border-gray-300 text-gray-700">{new Date(dob).toLocaleDateString('en-GB')}</td>
-        </tr>
-    </tbody>
-</table>
+
 <br />
 <br />
 <br />
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
         <Footer />
     </>
   )

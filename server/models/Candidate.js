@@ -30,7 +30,11 @@ const candidateSchema = new mongoose.Schema({
         type: Number,
         // required: true
     },
-    symbol: {
+    phoneNumber: {
+        type: Number,
+        // required: true
+    },
+    biography: {
         type: String,
         // required: true
     },

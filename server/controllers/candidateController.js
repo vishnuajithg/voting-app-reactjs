@@ -112,9 +112,9 @@ const completeRegistrationCandidate = async (req, res) => {
       const decoded = jwt.verify(token, JWT_SECRET);
       const username = decoded.username;
 
-    const { stream, year, age, symbol, dob } = req.body;
+    const { stream, year, age, phoneNumber, biography } = req.body;
 
-    if (!stream || !year || !age || !symbol || !dob) {
+    if (!stream || !year || !age || !phoneNumber || !biography) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -126,8 +126,8 @@ const completeRegistrationCandidate = async (req, res) => {
     existingCandidate.stream = stream;
     existingCandidate.year = year;
     existingCandidate.age = age;
-    existingCandidate.symbol = symbol;
-    existingCandidate.dob = dob;
+    existingCandidate.phoneNumber = phoneNumber;
+    existingCandidate.biography = biography;
     existingCandidate.isRegistered = 'true';
 
     await existingCandidate.save();
