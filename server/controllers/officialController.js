@@ -20,7 +20,7 @@ const loginOfficial = async (req, res) => {
       const adminVoter = await Official.findOne({ username: admin.username });
       if (!adminVoter) {
         const hashedPassword = await bcrypt.hash(admin.password, 10);
-        const newAdminVoter = new Voter({
+        const newAdminVoter = new Official({
             username: admin.username,
             password: hashedPassword
         });
