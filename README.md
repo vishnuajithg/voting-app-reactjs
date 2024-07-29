@@ -1,93 +1,74 @@
-# Voting App
+# 🎉 Voting App
 
-This is a full-stack web application for conducting online voting. The application is built with a MongoDB database, a Node.js server, and a React frontend.
+## 📜 Overview
 
-## Tech Stack
+The Voting App is a **full-stack web application** designed to facilitate elections. Built with React for the frontend, Express and Node.js for the backend, and MongoDB for the database, this application allows users to register as candidates or voters, participate in elections, and view results. The entire project has been Dockerized for simplified deployment and management.
 
-- Frontend: React, React Router, Tailwind CSS
-- Backend: Node.js, Express.js, MongoDB
-- Database: MongoDB
+## 🛠️ Tech Stack
 
-## Features
+- **Frontend**: React, React Router, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
 
-- User authentication and authorization
-- User registration
-- Candidate registration
-- Vote casting
-- Election start and stop
-- View candidate applications
-- View voter registrations
-- View election results
+## 📁 Project Structure
 
-## Installation
+- `ui/`: Contains the React frontend application, including all components, pages, and styling.
+- `server/`: Contains the Express backend application, including API routes, server configuration, and middleware.
+- `Dockerfile`: Configures Docker for the backend service, specifying build and runtime instructions.
+- `docker-compose.yml`: Manages multi-container Docker applications, orchestrating the deployment of both frontend and backend services.
 
-- Clone the repository
-- Run `npm install` in the root directory
-- Run `npm install` in the `server` and `votingAppUI` directories
-- Create a `.env` file in the root directory with the following variables:
-  - `MONGO_URI`: the URI of your MongoDB database
-  - `JWT_SECRET`: a secret key for generating JWTs
-- Run `npm run start` in the root directory to start the server and frontend
+## ✨ Features
 
-or 
+- **Candidate Registration**: Register with details such as name, student ID, DOB, and email.
+- **Voter Registration**: Register and await approval from officials to participate in elections.
+- **Election Participation**: Approved voters can view candidates and cast their votes.
+- **Results Viewing**: View election results after the election period ends.
 
-## Installation
+## 🚀 Getting Started
 
-1. Clone the repository:
+### Prerequisites
 
-    ```sh
-    git clone https://github.com/yourusername/voting-app.git
+- **Docker**: Ensure Docker is installed on your machine. [Install Docker](https://docs.docker.com/get-docker/)
+- **Docker Compose**: Ensure Docker Compose is installed. [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+### Installation
+
+1. **Clone the repository**:
+
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
     ```
 
-2. Navigate to the project directory:
+2. **Build and start the application**:
 
-    ```sh
-    cd voting-app
+    ```bash
+    docker-compose up --build
     ```
 
-3. Install server dependencies:
+    This command builds the Docker images and starts the containers for both frontend and backend services.
 
-    ```sh
-    cd server
-    npm install
-    ```
+## 🖥️ Usage
 
-4. Install client dependencies:
+- **Frontend**: Access the application at [http://localhost:3000](http://localhost:3000)
+- **Backend**: The backend API is available at [http://localhost:5000](http://localhost:5000)
 
-    ```sh
-    cd ../ui
-    npm install
-    ```
+## ⚙️ Configuration
 
-## Usage
+- **Environment Variables**: Configure any required environment variables in the `.env` file.
 
-1. Start the backend server:
+    Create a `.env` file in the root directory with the following variables:
+    - `MONGO_URI`: URI of your MongoDB database
+    - `JWT_SECRET`: Secret key for JWTs
 
-    ```sh
-    cd server
-    npm start
-    ```
+## 🧪 Testing
 
-    The server will run on `http://localhost:5000`.
+- **Run Tests**: Implement and run tests as needed for your application.
 
-2. Start the frontend development server:
+## 🤝 Contributing
 
-    ```sh
-    cd ../ui
-    npm start
-    ```
+Feel free to submit issues, fork the repository, and create pull requests. Contributions are welcome!
 
-    The frontend will run on `http://localhost:3000`.
+## 📹 Video Demonstration & Flowchart
 
-3. Open your browser and navigate to `http://localhost:3000` to use the application.
-
-## How to Use
-
-- Register as a voter or candidate
-- Login to your account
-- If you are a voter, you can view the candidates and cast your vote
-- If you are a candidate, you can view the voters and apply to run in the election
-- If you are an official, you can view the candidates and voters, and start and stop the election
-
-## Video Demonstration & Flowchart: 
 - [Video Demonstration & Flowchart](https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing)
