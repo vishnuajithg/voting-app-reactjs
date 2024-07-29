@@ -90,6 +90,4 @@ or
 - If you are an official, you can view the candidates and voters, and start and stop the election
 
 ## Video Demonstration & Flowchart: 
-https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing
-- [Login Page](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/votingAppUI/src/assets/img/undraw_candidate_ubwv.svg)
-
+- [Video Demonstration & Flowchart](https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing)
