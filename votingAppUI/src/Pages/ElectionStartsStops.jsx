@@ -324,7 +324,7 @@ const CreateElectionForm = () => {
             />
           </div>
           <div className="mb-4">
-            <button type="submit" onClick={handleSubmit} className="w-full bg-[#409D9B] hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Election Details</button>
+            <button type="submit" onClick={handleSubmit} className="w-full bg-[#409D9B] hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Election Details and Initialize!</button>
           </div>
         </form>
         <hr />
