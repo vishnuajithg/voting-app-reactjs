@@ -7,6 +7,7 @@ const Official = () => {
   return (
     <>
       <Outlet/>
+      
     </>
   )
 }

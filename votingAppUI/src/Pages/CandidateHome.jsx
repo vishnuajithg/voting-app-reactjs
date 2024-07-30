@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import CandidateNavBar from '../components/CandidateNavBar'
 import Footer from '../components/Footer'
 import CandidateNavBar2 from '../components/CandidateNavBar2'
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 const CandidateHome = () => {
     
     const [name, setName] = useState('');
@@ -30,7 +31,7 @@ const CandidateHome = () => {
     <>
         <CandidateNavBar2/>
         <CandidateNavBar />
-        
+        <ToastContainer />
         <div >
             <br />
             <br />

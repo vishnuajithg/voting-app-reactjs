@@ -1,5 +1,7 @@
 import React from 'react'
-
+import loog from '../assets/img/home1.svg'
+import loogg from '../assets/img/home2.svg'
+import looggg from '../assets/img/home3.svg'
 const MainContentIndex = () => {
   return (
     <>
@@ -19,6 +21,23 @@ const MainContentIndex = () => {
     </div>
 </div>
 
+{/* <div className=" bg-wheat-400 py-6 max-w-[1600px] mx-auto">
+      <h2 className="text-center text-[24px] font-semibold mb-4">Upcoming Elections</h2>
+      <div className="relative overflow-hidden">
+        <div className="flex animate-scroll whitespace-nowrap w-full">
+          <div className="inline-block">
+            <img src={loog} alt="Election 1" className="w-[800px] h-[400px] object-cover rounded-md mx-8 shadow-md" />
+          </div>
+          <div className="inline-block">
+            <img src={loogg} alt="Election 2" className="w-[800px] h-[400px] object-cover rounded-md mx-8 shadow-md" />
+          </div>
+          <div className="inline-block">
+            <img src={looggg} alt="Election 3" className="w-[800px] h-[400px] object-cover rounded-md mx-8 shadow-md" />
+          </div>
+        </div>
+      </div>
+    </div> */}
+    
 {/* <!-- <div>
     poster goes here
 </div> --> */}

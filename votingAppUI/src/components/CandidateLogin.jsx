@@ -2,6 +2,7 @@ import React from 'react'
 import CandidateImage from '../assets/img/undraw_candidate_ubwv.svg'
 import {Link, useNavigate} from 'react-router-dom'
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 
 const CandidateLogin = () => {
 
@@ -18,8 +19,12 @@ const CandidateLogin = () => {
             body : JSON.stringify(loginCreds)
           })
           if(res.ok){
-            alert('Logged In')
+            // alert('Logged In')
+            toast.success('Logged In')
             return navigate(`/CandidateHome/`)
+          }
+          else{
+            toast.error('Invalid Credentials')
           }
         }
 
@@ -38,7 +43,7 @@ const CandidateLogin = () => {
 
 <div className="flex justify-center font-[500] text-[30px] text-[#2866AB] mt-10 font-[600] ">CANDIDATE LOGIN</div>
 
-<div className="grid grid-cols-2 gap-2 content-center bg-[#DFEFF0] rounded-md w-[70%] m-auto">
+<div className="grid grid-cols-2 gap-2 content-center bg-[#DFEFF0] rounded-md w-[70%] mx-auto my-auto">
     <div className="grid grid-row-3  mt-8 mr-10 justify-items-center place-content-center p-5 rounded-md h-[250px] m-auto">
         <form onSubmit={setLoginFormData}>
             <div>

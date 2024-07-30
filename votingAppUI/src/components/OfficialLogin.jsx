@@ -2,6 +2,7 @@ import React from 'react'
 import OfficialImage from '../assets/img/undraw_co-working_re_w93t.svg'
 import {Link, useNavigate} from 'react-router-dom'
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 
 const OfficialLogin = () => {
     const navigate = useNavigate()
@@ -17,8 +18,11 @@ const OfficialLogin = () => {
             body : JSON.stringify(loginCreds)
           })
           if(res.ok){
-            alert('Logined')
+            toast.success('Logged In')
             return navigate('/officialsHome')
+          }
+          else{
+            toast.error('Invalid Credentials')
           }
         }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import VoterImage from '../assets/img/undraw_voting_nvu7.svg'
 import {Link, useNavigate} from 'react-router-dom'
 import { useState, useEffect } from "react";
-
+import { toast } from 'react-toastify';
 const VoterLogin = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
@@ -17,8 +17,11 @@ const VoterLogin = () => {
             body : JSON.stringify(loginCreds)
           })
           if(res.ok){
-            alert('Logined')
+            toast.success('Logged In')
             return navigate('/VoterHome')
+          }
+          else{
+            toast.error('Invalid Credentials')
           }
         }
 
@@ -31,7 +34,7 @@ const VoterLogin = () => {
    }
   return (
     <>
-<div className="bg-[#F4F5F7] text-red-700">
+<div className="bg-[#F4F5F7] text-red-700 h-[90vh]">
 
 <div className="flex justify-center font-[500] text-[30px] text-[#2866AB] font-[600] ">VOTERS LOGIN</div>
 
