@@ -72,3 +72,7 @@ Feel free to submit issues, fork the repository, and create pull requests. Contr
 ## 📹 Video Demonstration & Flowchart
 
 - [Video Demonstration & Flowchart](https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing)
+
+- [Candidate Flowchart](https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing)
+
+
