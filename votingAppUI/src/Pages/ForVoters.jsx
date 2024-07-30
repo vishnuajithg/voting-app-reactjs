@@ -8,7 +8,7 @@ const ForVoters = () => {
     <>
       <NavBarCommon/>
       <VoterLogin/>
-      <Footer/>
+      <Footer/>  
     </>
   )
 }

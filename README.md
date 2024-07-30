@@ -19,6 +19,15 @@ The Voting App is a **full-stack web application** designed to facilitate electi
 
 ## ✨ Features
 
+- **🔐 User Authentication and Authorization**: Secure login for officials, candidates, and voters.
+- **📝 User Registration**: Registration forms for both candidates and voters.
+- **🗳️ Candidate Management**: Approval and rejection of candidate applications by officials.
+- **✅ Voter Management**: Approval and rejection of voter registrations by officials.
+- **🎯 Vote Casting**: Interface for voters to cast their votes during an active election.
+- **⚙️ Election Control**: Features for officials to create, start, and stop elections.
+- **📊 Result Viewing**: Tabs for candidates, voters, and officials to view election results.
+
+
 - **Candidate Registration**: Register with details such as name, student ID, DOB, and email.
 - **Voter Registration**: Register and await approval from officials to participate in elections.
 - **Election Participation**: Approved voters can view candidates and cast their votes.
@@ -73,10 +82,10 @@ Feel free to submit issues, fork the repository, and create pull requests. Contr
 
 - [Video Demonstration & Flowchart](https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing)
 
-- [Flowdiagram of Officials](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/Officials.jpg)
+- [Flow Diagram of Officials](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/Officials.jpg)
 
-- [Flowdiagram Candidates](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/CANDIDATE.jpg)
+- [Flow Diagram Candidates](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/CANDIDATE.jpg)
 
-- [Flowdiagram Voters](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/VOTER.jpg)
+- [Flow Diagram Voters](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/VOTER.jpg)
 
 

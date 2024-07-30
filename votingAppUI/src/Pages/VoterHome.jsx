@@ -17,7 +17,7 @@ const VoterHome = () => {
 
   // const [password, setPassword] = useState('');
 
-    useEffect(() => {
+    useEffect(() => { 
       // Fetch user details using the username
       const fetchUserDetails = async () => {
         const res = await fetch(`/api/voter/voterHome`);

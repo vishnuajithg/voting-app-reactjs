@@ -10,7 +10,7 @@ const {
   
 const  authenticateToken  = require('../Middleware/auth.js');
 
-
+ 
 const router = express.Router();
 
 router.post('/candidateRegistrationForm', registerCandidate);
@@ -21,4 +21,5 @@ router.get('/isRegistered',authenticateToken, isRegistered);
 router.get('/isApproved',authenticateToken, isApproved);
 
 router.post("/logout", logout)
-module.exports = router;
+module.exports = router; 
+ 
