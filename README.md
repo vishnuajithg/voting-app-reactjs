@@ -1,4 +1,4 @@
-# 🎉 Voting App
+# 🎉 Voting App - Web2 Based
 
 ## 📜 Overview
 
