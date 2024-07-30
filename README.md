@@ -73,10 +73,10 @@ Feel free to submit issues, fork the repository, and create pull requests. Contr
 
 - [Video Demonstration & Flowchart](https://drive.google.com/drive/folders/1zBVnMeQQvL7K1V7SPC53NUFqC_ET4bVY?usp=sharing)
 
-- [Candidate Officials](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/Officials.jpg)
+- [Flowdiagram of Officials](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/Officials.jpg)
 
-- [Candidate Candidates](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/CANDIDATE.jpg)
+- [Flowdiagram Candidates](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/CANDIDATE.jpg)
 
-- [Candidate Voters](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/VOTER.jpg)
+- [Flowdiagram Voters](https://github.com/vishnuajithg/voting-app-reactjs/blob/main/Documentation/FlowDiagrams/VOTER.jpg)
 
 
